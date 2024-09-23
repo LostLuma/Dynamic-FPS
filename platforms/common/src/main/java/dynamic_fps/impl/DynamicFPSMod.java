@@ -25,8 +25,10 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +68,19 @@ public class DynamicFPSMod {
 		Version version = platform.getModVersion(Constants.MOD_ID).orElseThrow();
 
 		Logging.getLogger().info("Dynamic FPS {} active on {}!", version, platform.getName());
+
+		// Thread.ofPlatform().name("worstie's-thread").start(DynamicFPSMod::playSoundOffthread);
+	}
+
+	private static void playSoundOffthread() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			Thread.interrupted();
+			return;
+		}
+
+		minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 	}
 
 	public static boolean disabledByUser() {

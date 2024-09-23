@@ -12,7 +12,8 @@
         "SoundEngineMixin",
         "ToastComponentMixin",
         "WindowMixin",
-        "bugfix.BlockableEventLoopMixin"
+        "bugfix.BlockableEventLoopMixin",
+        "debug.SoundEngineMixin"
     ],
     "mixins": [],
     "server": [],
